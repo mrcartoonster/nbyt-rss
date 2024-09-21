@@ -20,7 +20,7 @@ def main(urls: List[str]):
 
         link = getting_link(url)
 
-        newsboat = Path("/Users/evanbaird/.newsboat/urls_copy")
+        newsboat = Path("/Users/evanbaird/.newsboat/urls")
 
         with newsboat.open(mode="a", encoding="utf-8") as wr:
             wr.write(f'\n{link} "~{channel_name(url_name=url)}"')
