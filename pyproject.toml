@@ -5,6 +5,9 @@ description = ""
 authors = ["Evan Baird <evanbaird@evans-mbp.lan>"]
 readme = "README.md"
 
+[tool.poetry.scripts]
+nbyt-rss = "nbyt_rss.main:app"
+
 [tool.poetry.dependencies]
 python = "^3.12"
 typer = "^0.12.5"
