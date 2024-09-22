@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "nbyt-rss"
-version = "0.4.4"
+version = "0.4.7"
 description = "Simple CLI app to add YouTube RSS feeds correctly."
 authors = ["Evan Baird <mrcartoonster@gmail.com>"]
 readme = "README.md"

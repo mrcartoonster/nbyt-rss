@@ -7,7 +7,7 @@ from rich import print
 from typing_extensions import Annotated
 
 from .__init__ import __version__
-from .getting import channel_name, getting_link
+from .getting import channel_name, getting_link, getting_name
 
 app = typer.Typer(rich_markup_mode="rich")
 
@@ -46,3 +46,7 @@ def main(
 
         with newsboat.open(mode="a", encoding="utf-8") as wr:
             wr.write(f'\n{link} "~{channel_name(url_name=url)}"')
+
+        print(
+            f"{getting_name(url)} channel has been added to newsboat urls for you.",
+        )
