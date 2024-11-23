@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+import re
+from pathlib import Path
+
 import httpx
 from parsel import Selector
 from yarl import URL
@@ -7,6 +10,13 @@ from yarl import URL
 # TODO: Think up another name for the class and functions as well.
 # TODO: URL to define and delegate each part for each method.
 # TODO: URL view the docs due to their may be a cache: https://tinyurl.com/2ctm95fo
+
+
+def exception_duplicate_url(exception, message):
+    """
+    This is a quick base exception to raise duplicate url in newsboat.
+    """
+    return exception(message)
 
 
 class Getting:
@@ -57,3 +67,27 @@ class Getting:
         """
 
         return self.yt_url.parts[1].replace("@", "")
+
+
+class Duplicate:
+    """
+    Quick check that video url not a duplicate.
+    """
+
+    # TODO: Create test following typer test document!
+    NEWSBOAT_URLS = Path("/Users/evanbaird/.newsboat/urls")
+
+    def __init__(self, the_check):
+        self.the_check = the_check
+
+    def check(self):
+        url = Getting(self.the_check)
+
+        if re.search(
+            f"~{url.channel_name()}",
+            Duplicate.NEWSBOAT_URLS.read_text(),
+        ):
+            raise exception_duplicate_url(
+                ValueError,
+                f"{url.channel_name} is already in your urls list.",
+            )
