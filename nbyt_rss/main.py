@@ -9,7 +9,7 @@ from typing_extensions import Annotated
 from .__init__ import __version__
 
 # from .getting import Duplicate, getting_link, getting_name, channel_name
-from .getting import *
+from .getting import Duplicate, Getting
 
 app = typer.Typer(rich_markup_mode="rich")
 
@@ -49,13 +49,15 @@ def main(
             print("This channel is already in your list!")
             raise typer.Exit(code=1)
 
-        link = getting_link(url)
+        u = Getting(url)
+
+        link = u.getting_link()
 
         newsboat = Path("/Users/evanbaird/.newsboat/urls")
 
         with newsboat.open(mode="a", encoding="utf-8") as wr:
-            wr.write(f'\n{link} "~{channel_name(url_name=url)}"')
+            wr.write(f'\n{link} "~{u.channel_name()}"')
 
         print(
-            f"{getting_name(url)} channel has been added to newsboat urls for you.",
+            f"{u.getting_name()} channel has been added to newsboat urls for you.",
         )
