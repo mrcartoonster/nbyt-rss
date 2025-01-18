@@ -7,7 +7,9 @@ from rich import print
 from typing_extensions import Annotated
 
 from .__init__ import __version__
-from .getting import Duplicate, channel_name, getting_link, getting_name
+
+# from .getting import Duplicate, getting_link, getting_name, channel_name
+from .getting import *
 
 app = typer.Typer(rich_markup_mode="rich")
 
@@ -44,7 +46,7 @@ def main(
         dupe_check = Duplicate(url)
 
         if dupe_check.check():
-            print("")
+            print("This channel is already in your list!")
             raise typer.Exit(code=1)
 
         link = getting_link(url)

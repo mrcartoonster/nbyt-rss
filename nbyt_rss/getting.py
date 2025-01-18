@@ -89,5 +89,5 @@ class Duplicate:
         ):
             raise exception_duplicate_url(
                 ValueError,
-                f"{url.channel_name} is already in your urls list.",
+                f"{url.channel_name()} is already in your urls list.",
             )
