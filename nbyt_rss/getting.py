@@ -83,8 +83,8 @@ class Duplicate:
     def check(self):
         url = Getting(self.the_check)
 
-        if re.search(
-            f"~{url.channel_name()}",
+        if re.findall(
+            f"~.*{url.channel_name()}",
             Duplicate.NEWSBOAT_URLS.read_text(),
         ):
             raise exception_duplicate_url(
